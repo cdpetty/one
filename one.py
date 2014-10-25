@@ -1,4 +1,4 @@
-
+#! /usr/bin/env python3
 ##############################################################################
 #
 #       OOOOOOOOO     NNNNNNNN        NNNNNNNNEEEEEEEEEEEEEEEEEEEEEE
@@ -24,9 +24,6 @@ import upload, download, delete, user, argparse, signal, sys, logger, diff, requ
 import list as lister
 
 
-SILENT = False
-
-
 def build_arg_parser():
   # Create Arg parser
   parser = argparse.ArgumentParser(description='Push and pull files from Mediafire',
@@ -34,12 +31,11 @@ def build_arg_parser():
 
   parser.add_argument('sub_command', 
       help='Choose the subcommand to execute',
-      choices=['push', 'pull', 'del', 'init', 'list', 'diff'], 
+      choices=['push', 'pull', 'del', 'init', 'list', 'diff', 'out', 'change'], 
       type=str)
   
   parser.add_argument('files', type=str, nargs='*', help='Files to work with')
 
-  parser.add_argument('-s', '--silent', action='store_true', help='Stop all output to stdout')
 
   return parser 
 def main():
@@ -77,6 +73,10 @@ def main():
     else:
       for f in args.files:
         diff.diff(f)
+  elif (args.sub_command == 'out'):
+    user.log_out()
+  elif (args.sub_command == 'change'):
+    user.change_user()
 
 if __name__ == '__main__':
   def sigint_handler(signal, frame):

@@ -1,5 +1,6 @@
 from mediafire.client import Folder
-import mediafire, requests, getpass, logger
+from simplecrypt import encrypt, decrypt
+import mediafire, requests, getpass, logger, base64, binascii
 import os.path as p
 import os
 import client as c
@@ -64,3 +65,9 @@ def check_one_existance(client):
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
 
+def log_out():
+  os.unlink(os.path.expanduser('~/.one'))
+
+def change_user():
+  log_out()
+  sign_in()

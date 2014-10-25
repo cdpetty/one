@@ -9,8 +9,9 @@ def list_files():
       logger.end('No Files Stored')
     else:
       logger.log('Files contained on Mediafire/One:')
-    for f in contents:
-      logger.log('  ', f['privacy'], '  ', f['revision'], '  ', f['size'], '  ', f['filename'])
+      logger.log('   Privacy   Revision     Size      Filename')
+      for f in contents:
+        logger.log('  ', f['privacy'], '  ', f['revision'], '        ', f['size'], '      ', f['filename'])
   else:
     user.get_auth()
 
