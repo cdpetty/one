@@ -1,4 +1,4 @@
-import user, os, logger, requests
+import user, os, logger, requests, xattr, binascii
 import client as c
 from mediafire.client import File
 
@@ -13,8 +13,8 @@ def upload(path):
       else:
         try:
           client.upload_file(f, 'mf:/one_storage/')
-          updated_hash = get_hash(os.path.basename(f))
-          os.setxattr(f, 'hash', upadted_hash)
+          updated_hash = get_hash(os.path.basename(f), client)
+          xattr.setxattr(f, 'hash', binascii.a2b_qp(updated_hash))
           logger.log('File "' + os.path.basename(f) + '" has been succesfully uploaded.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')

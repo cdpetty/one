@@ -1,4 +1,4 @@
-import user, os, logger, requests
+import user, os, logger, requests, xattr, binascii
 import client as c
 from mediafire.client import File
 
@@ -15,7 +15,7 @@ def download(filename):
         try:
           client.download_file("mf:/one_storage/" + filename , '.')
           file_info = existance[1]
-          os.setxattr(filename, 'hash', file_info['hash'])
+          xattr.setxattr(filename, 'hash', binascii.a2b_qp(file_info['hash']))
           logger.log('File "' + filename + '" downloaded successfully.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')
