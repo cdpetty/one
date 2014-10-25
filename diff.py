@@ -10,15 +10,15 @@ def diff(filename):
   if (os.path.isfile(full_expansion)):
     in_file = open(filename, 'r')
     file_contents = in_file.read().encode('utf-8')
-    hashed = hashlib.sha256(file_contents).hexdigest()
+
+    new_hash = hashlib.sha256(file_contents).hexdigest()
     media_hash = get_hash(os.path.basename(full_expansion))
+    old_hash = os.getxattr(full_expansion, 'hash')
+
     if (media_hash == ''):
       logger.die('No file "' + os.path.basename(full_expansion) + '" in Mediafire')
     else:
-      if (hashed == media_hash):
-        logger.end('Local file is up to date')
-      else:
-        logger.end('Local file is either behind or ahead')
+      figure_time_scale(media_hash, old_hash, new_hash)
   else:
     logger.die('No local file "' + os.path.basename(full_expansion) + '" found')
 
@@ -36,3 +36,13 @@ def get_hash(filename):
     return ''
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
+
+def figure_time_scale(media_hash, old_hash, new_hash):
+  if (old_hash == media_hash and new_hash != old_hash and new_hash != media_hash):
+    logger.end('The local file is ahead of the remote')
+  elif(old_hash == media_hash == new_hash):
+    logger.end('The files are all synced')
+  elif(old_hash == new_hash and media_hash != old_hash and media_hash != new_hash):
+    logger.end('The remote is ahead of the local file')
+  elif(old_hash != new_hash != media_hash):
+    logger.end('Both the remote and head are out of sync')

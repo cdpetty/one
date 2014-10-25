@@ -11,7 +11,7 @@ def list_files():
       logger.log('Files contained on Mediafire/One:')
       logger.log('   Privacy   Revision     Size      Filename')
       for f in contents:
-        logger.log('  ', f['privacy'], '  ', f['revision'], '        ', f['size'], '      ', f['filename'])
+        logger.log('  ', f['privacy'], '  ', f['revision'], '        ', f['size'], '       ', f['filename'])
   else:
     user.get_auth()
 

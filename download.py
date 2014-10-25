@@ -10,9 +10,12 @@ def download(filename):
     if (os.path.isfile(filename) or os.path.isdir(filename)):
       logger.die('File or dir with name "' + filename + '" in current directory')
     else:
-      if (check_existance(filename, client)):
-        client.download_file("mf:/one_storage/" + filename , '.')
+      existance = check_existance(filename, client)
+      if (existance[0]):
         try:
+          client.download_file("mf:/one_storage/" + filename , '.')
+          file_info = existance[1]
+          os.setxattr(filename, 'hash', file_info['hash'])
           logger.log('File "' + filename + '" downloaded successfully.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')
@@ -29,8 +32,8 @@ def check_existance(filename, client):
     for item in contents:
       if type(item) is File:
         if item['filename'] == filename:
-          return True
-    return False
+          return (True, item)
+    return (False, None)
 
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')

@@ -13,6 +13,8 @@ def upload(path):
       else:
         try:
           client.upload_file(f, 'mf:/one_storage/')
+          updated_hash = get_hash(os.path.basename(f))
+          os.setxattr(f, 'hash', upadted_hash)
           logger.log('File "' + os.path.basename(f) + '" has been succesfully uploaded.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')
@@ -36,3 +38,15 @@ def check_existance(filename, client):
     return False
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
+
+def get_hash(filename, client):
+  try:
+    contents = client.get_folder_contents_iter('mf:/one_storage')
+    for item in contents:
+      if type(item) is File:
+        if item['filename'] == filename:
+          return  item['hash']
+    return '' 
+  except requests.exceptions.RequestException:
+    logger.die('Network error, please check network status and try again')
+
