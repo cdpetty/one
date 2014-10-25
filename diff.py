@@ -42,10 +42,10 @@ def get_hash(filename):
 
 def figure_time_scale(media_hash, old_hash, new_hash, filename):
   if (old_hash == media_hash and new_hash != old_hash and new_hash != media_hash):
-    logger.end('One: The local file, "' + filename + '", is ahead of the remote')
+    logger.end('One: The local file, "' + filename + '", is ahead of the remote.')
   elif(old_hash == media_hash == new_hash):
-    logger.end('One: All files are properly synced')
+    logger.end('One: All files are properly synced.')
   elif(old_hash == new_hash and media_hash != old_hash and media_hash != new_hash):
-    logger.end('One: The remote file, "' + filename + '", is ahead of the local file')
+    logger.end('One: The remote file, "' + filename + '", is ahead of the local file.')
   elif(old_hash != new_hash != media_hash):
-    logger.end('One: The remote and head are out of sync')
+    logger.end('One: The remote and head are out of sync.')

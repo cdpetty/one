@@ -67,6 +67,7 @@ def check_one_existance(client):
 
 def log_out():
   os.unlink(os.path.expanduser('~/.one'))
+  logger.end('You have been logged out.')
 
 def change_user():
   log_out()

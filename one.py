@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-import upload, download, delete, user, argparse, signal, sys, logger, diff, requests, sys
+import upload, download, delete, user, argparse, signal, sys, logger, diff, requests, sys, share
 import list as lister
 
 
@@ -31,7 +31,7 @@ def build_arg_parser():
 
   parser.add_argument('sub_command', 
       help='Choose the subcommand to execute',
-      choices=['push', 'pull', 'del', 'init', 'list', 'diff', 'out', 'change'], 
+      choices=['push', 'pull', 'del', 'init', 'list', 'diff', 'out', 'change', 'share'], 
       type=str)
   
   parser.add_argument('files', type=str, nargs='*', help='Files to work with')
@@ -77,6 +77,13 @@ def main():
     user.log_out()
   elif (args.sub_command == 'change'):
     user.change_user()
+  elif (args.sub_command == 'share'):
+    if (len(args.files) == 0):
+      logger.die('Must include at least on file')
+    else:
+      for f in args.files:
+        share.share(f)
+
 
 if __name__ == '__main__':
   def sigint_handler(signal, frame):
