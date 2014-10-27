@@ -13,7 +13,7 @@ def share(filename):
 
 
 def mail(link):
-  send_mail = input('Send link in an email? [y/n]')
+  send_mail = input('Send link in an email? [y/n] ')
   if (send_mail[0].lower() == 'y'):
     which_email = input('Email address: ')
     lol.send_email(which_email, link)
