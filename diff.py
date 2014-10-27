@@ -7,10 +7,10 @@ def diff(filename):
   current file to the sha256 hash stored on mediafire'''
 
   full_expansion = get_path_expansion(filename)
+
   if (os.path.isfile(full_expansion)):
     in_file = open(filename, 'r')
     file_contents = in_file.read().encode('utf-8')
-
     new_hash = hashlib.sha256(file_contents).hexdigest()
     media_hash = get_hash(os.path.basename(full_expansion))
     try:

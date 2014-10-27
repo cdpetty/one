@@ -1,4 +1,5 @@
 import sys
+
 def log(*statements):
   phrase = ' '.join(map(str, statements)) + '\n'
   sys.stdout.write(phrase)

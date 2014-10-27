@@ -5,21 +5,24 @@ from mediafire.client import File
 def upload(path):
   '''upload a file with the directory path "path"'''
   if (user.is_user_signed_in()):
-    f = get_path_expansion(path)
-    if (os.path.isfile(f)):
+    full_path_expansion = get_path_expansion(path)
+    file_name = os.path.basename(full_path_expansion)
+    if (os.path.isfile(full_path_expansion)):
+        
       client = c.get_client() 
-      if (check_existance(os.path.basename(f), client)):
-        logger.die('File with name "' + os.path.basename(f) + '" already exists')
+      if (check_existance(file_name, client)):
+        logger.die('File with name "' + file_name + '" already exists')
       else:
         try:
-          client.upload_file(f, 'mf:/one_storage/')
-          updated_hash = get_hash(os.path.basename(f), client)
-          xattr.setxattr(f, 'hash', binascii.a2b_qp(updated_hash))
-          logger.log('File "' + os.path.basename(f) + '" has been succesfully uploaded.')
+          client.upload_file(full_path_expansion, 'mf:/one_storage/')
+          #updated_hash = get_hash(full_path_expansion, client)
+          #xattr.setxattr(f, 'hash', binascii.a2b_qp(updated_hash))
+          logger.log('File "' + file_name + '" has been succesfully uploaded.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')
-    elif (os.path.isdir(f)):
-      logger.die('File, "' + f + '", is a directory')
+
+    elif (os.path.isdir(full_path_expansion)):
+      logger.die('File, "' + full_path_expansion + '", is a directory')
     else:
       logger.die('No such file or directory')
   else:
@@ -39,7 +42,7 @@ def check_existance(filename, client):
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
 
-def get_hash(filename, client):
+'''def get_hash(filename, client):
   try:
     contents = client.get_folder_contents_iter('mf:/one_storage')
     for item in contents:
@@ -48,5 +51,5 @@ def get_hash(filename, client):
           return  item['hash']
     return '' 
   except requests.exceptions.RequestException:
-    logger.die('Network error, please check network status and try again')
+    logger.die('Network error, please check network status and try again')'''
 
