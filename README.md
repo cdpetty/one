@@ -4,8 +4,8 @@ one
 Easy file Mediafire file management from the command line.
 
 ###Installation
-[Create Mediafire account](https://www.mediafire.com/ssl_login.php)
-Follow the [Mediafire instructions](https://github.com/roman-yepishev/mediafire-python-open-sdk) to install the Python SDK
+[Create Mediafire account](https://www.mediafire.com/ssl_login.php)  
+Follow the [Mediafire instructions](https://github.com/roman-yepishev/mediafire-python-open-sdk) to install the Python SDK  
 git clone https://github.com/cdpetty/one.git ~/One
 
 Add this line to your bashrc (or zshrc, etc):
