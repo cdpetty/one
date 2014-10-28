@@ -1,7 +1,7 @@
 one
 ===
 
-Easy file Mediafire file management from the command line.
+Easy MediaFire file management from the command line.
 
 ###Installation
 [Create Mediafire account](https://www.mediafire.com/ssl_login.php)  
