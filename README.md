@@ -1,12 +1,13 @@
 one
 ===
 
-Easy file Mediafire file management from the command line.
+Easy MediaFire file management from the command line.
 
 ###Installation
 [Create Mediafire account](https://www.mediafire.com/ssl_login.php)  
-Follow the Mediafire instructions to install the [Python SDK](https://github.com/roman-yepishev/mediafire-python-open-sdk)  
-git clone https://github.com/cdpetty/one.git ~/One
+Follow the Mediafire instructions to install the [Python SDK](https://github.com/roman-yepishev/mediafire-python-open-sdk)   
+Install Python [xattr library](https://pypi.python.org/pypi/xattr)  
+git clone https://github.com/cdpetty/one.git ~/One  
 
 Add this line to your bashrc (or zshrc, etc):
 alias one="python3 ~/One/one.py"
