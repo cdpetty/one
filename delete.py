@@ -1,32 +1,39 @@
 from mediafire.client import File
-import user, logger, argparse, requests
+import user, logger, argparse, requests, os
 import client as c
 
-def delete(filename):
+def delete(file_path):
   '''Deletes file with name "filename" from
   Mediafire account.'''
   if (user.is_user_signed_in()):
     client = c.get_client()
-    if (check_existance(filename, client)):
+    file_path = sanitize_path(file_path)
+    if (check_existance(file_path, client)):
       try: 
-        client.delete_file('mf:/one_storage/' + filename)
-        logger.log('File "' + filename + '" successfully deleted.')
+        client.delete_file('mf:' + file_path)
+        logger.log('File "' + os.path.basename(file_path) + '" successfully deleted.')
       except requests.exceptions.RequestException:
         logger.die('Network error, please check network status and try again')
     else:
-      logger.die('File "' + filename + '" does not exist.')
+      logger.die('File with path and name "' + file_path + '" does not exist.')
   else:
     user.get_auth()
 
-def check_existance(filename, client):
+def check_existance(file_path, client):
   try:
-    contents = client.get_folder_contents_iter('mf:/one_storage/')
+    contents = client.get_folder_contents_iter('mf:' + os.path.dirname(file_path) + '/')
     for item in contents:
       if type(item) is File:
-        if item['filename'] == filename:
+        if item['filename'] == os.path.basename(file_path):
           return True
     return False
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
 
-
+def sanitize_path(path):
+  path = os.path.normpath(path)
+  if (path[0] != '/'):
+    path = '/' + path
+  if (path[-1] == '/'):
+    path = path[0:-1]
+  return path

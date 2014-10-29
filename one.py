@@ -33,6 +33,7 @@ def build_arg_parser():
       help='Choose the subcommand to execute',
       choices=['push', 'pull', 'del', 'init', 'list', 'diff', 'out', 'change', 'share'], 
       type=str)
+  parser.add_argument('-p', '--upload_path', dest='upload_path', type=str, help='Specify the MediaFire path for upload')
   
   parser.add_argument('files', type=str, nargs='*', help='Files to work with')
 
@@ -47,7 +48,7 @@ def main():
       logger.die('Must include at least one file')
     else:
       for f in args.files:
-        upload.upload(f) 
+        upload.upload(f, args.upload_path) 
   elif (args.sub_command == 'pull'):
     if (len(args.files) == 0):
       logger.die('Must include at least one file')
@@ -66,7 +67,11 @@ def main():
     else:
       user.get_auth()
   elif (args.sub_command == 'list'):
-    lister.list_files()
+    if (len(args.files) == 0):
+      lister.list_files('')
+    else:
+      for f in args.files:
+        lister.list_files(f)
   elif (args.sub_command == 'diff'):
     if (len(args.files) == 0):
       logger.die('Must include at least one file')
