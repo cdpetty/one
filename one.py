@@ -26,7 +26,7 @@ import list as lister
 
 def build_arg_parser():
   # Create Arg parser
-  parser = argparse.ArgumentParser(description='Push and pull files from Mediafire',
+  parser = argparse.ArgumentParser(description='Push and pull files from MediaFire',
       prog='One')
 
   parser.add_argument('sub_command', 

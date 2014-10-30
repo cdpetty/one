@@ -9,7 +9,7 @@ def list_files(path):
     if (len(contents) == 0):
       logger.end('No Files Stored')
     else:
-      logger.log('Files contained on Mediafire/One:')
+      logger.log('Files contained on MediaFire/One:')
       logger.log('   Type       Privacy    Revision   Size/File_Count    Filename')
       for f in contents:
         if (type(f) == File):

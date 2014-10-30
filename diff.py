@@ -4,7 +4,7 @@ from mediafire.client import File
 
 def diff(filename, mf_path=''):
   '''Use hashlib library to compare sha256 hash of
-  current file to the sha256 hash stored on mediafire'''
+  current file to the sha256 hash stored on MediaFire'''
 
   full_expansion = get_path_expansion(filename)
   if(mf_path == '' or not mf_path):
@@ -25,7 +25,7 @@ def diff(filename, mf_path=''):
       old_hash = '' 
 
     if (media_hash == ''):
-      logger.die('No file path "' + mf_path + '/' + os.path.basename(filename) + '" in Mediafire')
+      logger.die('No file path "' + mf_path + '/' + os.path.basename(filename) + '" in MediaFire')
     else:
       figure_time_scale(media_hash, old_hash, new_hash, os.path.basename(full_expansion))
   else:

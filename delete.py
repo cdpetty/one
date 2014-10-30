@@ -4,7 +4,7 @@ import client as c
 
 def delete(file_path):
   '''Deletes file with name "filename" from
-  Mediafire account.'''
+  MediaFire account.'''
   if (user.is_user_signed_in()):
     client = c.get_client()
     file_path = sanitize_path(file_path)

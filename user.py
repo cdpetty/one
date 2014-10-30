@@ -20,7 +20,7 @@ def is_user_signed_in():
   return p.isfile(INFO_PATH) 
 
 def sign_in():
-  is_old = input('Do you already have a Mediafire account? [y/n] ')
+  is_old = input('Do you already have a MediaFire account? [y/n] ')
   if (is_old[0].lower() == 'y'):
     email = input('What is your email: ').lower()
     password = getpass.getpass('What is your password: ')
@@ -38,9 +38,9 @@ def sign_in():
           logger.die('Network error, please check network status and try again')
       logger.end('You are signed in!')
     else:
-      logger.die('Either your credentials are incorrect or your account does not exist.\nPlease try again or see Mediafire.com')
+      logger.die('Either your credentials are incorrect or your account does not exist.\nPlease try again or see MediaFire.com')
   elif (is_old[0].lower() == 'n'):
-      logger.end('Please go to Mediafire.com and create an account.') 
+      logger.end('Please go to MediaFire.com and create an account.') 
   else:
     logger.log('Please answer with a a "n" or "y"')
     sign_in()
@@ -49,7 +49,7 @@ def check_existance(email, password):
   try:
     client = c.get_client(email, password) 
     return (True, client)
-  except (mediafire.api.MediaFireApiError):
+  except (MediaFire.api.MediaFireApiError):
     return (False, None)
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
