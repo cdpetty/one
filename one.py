@@ -76,8 +76,9 @@ def main():
     if (len(args.files) == 0):
       logger.die('Must include at least one file')
     else:
-      for f in args.files:
-        diff.diff(f)
+        for f in args.files:
+          diff.diff(f, args.upload_path)
+        
   elif (args.sub_command == 'out'):
     user.log_out()
   elif (args.sub_command == 'change'):

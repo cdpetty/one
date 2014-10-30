@@ -1,4 +1,4 @@
-from mediafire.client import File
+from mediafire.client import File, NotAFolderError, ResourceNotFoundError
 import user, logger, argparse, requests, os
 import client as c
 
@@ -29,6 +29,11 @@ def check_existance(file_path, client):
     return False
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
+  except NotAFolderError:
+    logger.die('Path "' + file_path + '" not found on MediaFire')
+  except ResourceNotFoundError:
+    logger.die('Path "' + file_path + '" not found on MediaFire.')
+
 
 def sanitize_path(path):
   path = os.path.normpath(path)

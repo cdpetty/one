@@ -1,6 +1,6 @@
 import user, os, logger, requests, xattr, binascii
 import client as c
-from mediafire.client import File
+from mediafire.client import File, ResourceNotFoundError, NotAFolderError
 
 
 def download(file_path):
@@ -19,6 +19,10 @@ def download(file_path):
           file_info = existance[1]
           xattr.setxattr(filename, 'hash', binascii.a2b_qp(file_info['hash']))
           logger.log('File "' + filename + '" downloaded successfully.')
+        except NotAFolderError:
+          logger.die('Path "' + remote_path + '" not found on MediaFire')
+        except ResourceNotFoundError:
+          logger.die('Path "' + remote_path + '" not found on MediaFire.')
         except requests.exceptions.RequestException:
           logger.die('Network error, please check network status and try again')
 
@@ -39,6 +43,11 @@ def check_existance(file_path, client):
 
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
+  except NotAFolderError:
+    logger.die('Path "' + file_path + '" not found on MediaFire')
+  except ResourceNotFoundError:
+    logger.die('Path "' + file_path + '" not found on MediaFire.')
+
 
 def sanitize_path(path):
   path = os.path.normpath(path)

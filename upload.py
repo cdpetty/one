@@ -1,6 +1,6 @@
 import user, os, logger, requests, xattr, binascii
 import client as c
-from mediafire.client import File, ResourceNotFoundError
+from mediafire.client import File, ResourceNotFoundError, NotAFolderError
 
 def upload(path, remote_path=''):
   '''upload a file with the directory path "path"'''
@@ -44,6 +44,10 @@ def check_existance(filename, remote_path, client):
     return False
   except requests.exceptions.RequestException:
     logger.die('Network error, please check network status and try again')
+  except NotAFolderError:
+    logger.die('Path "' + remote_path + '" not found on MediaFire')
+  except ResourceNotFoundError:
+    logger.die('Path "' + remote_path + '" not found on MediaFire.')
 
 
 def sanitize_path(path):
