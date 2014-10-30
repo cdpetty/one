@@ -49,3 +49,4 @@ Run "one list" to receive a list of the files currently stored on the signed in 
 ####"one del"
 Run "one del [files]" to delete a file from Mediafire  
 Ex: "$one del test1.txt test2.docx" will delete test1.txt and test2.docx from the signed in Mediafire account
+  You can specify a path on Mediafire. e.g. "one del MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"
