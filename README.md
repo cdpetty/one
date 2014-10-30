@@ -26,27 +26,27 @@ Run "one change" to switch users
 
 ####"one push"
 Run "one push [files]" to upload files to a Mediafire account  
-  You can specify a path on Mediafire. e.g. "one push test1.txt -p MediaFire_Folder_1/MediaFire_Folder_2"
-Ex: "$one push test1.txt test2.docx" will upload test.txt and test2.docx to the signed in account
+  You can specify a path on Mediafire. e.g. "one push test1.txt -p MediaFire_Folder_1/MediaFire_Folder_2"  
+Ex: "$one push test1.txt test2.docx" will upload test.txt and test2.docx to the signed in account  
 
 ####"one pull"
 Run "one pull [files]" to download files from a Mediafire account  
-  You can specify a path on Mediafire. e.g. "one pull MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"
-Ex: "$one pull test1.txt test2.docx" will download test.txt and test2.docx to the current folder
+  You can specify a path on Mediafire. e.g. "one pull MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"  
+Ex: "$one pull test1.txt test2.docx" will download test.txt and test2.docx to the current folder  
 
 ####"one diff"
-Run "one diff [files]" to see if the remote or local file is more up to date  
-  You can specify a path on Mediafire. e.g. "one diff test1.txt -p MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"
-Ex: "$one diff test1.txt" will state if the file on Mediafire is more or less up to date than the local file
+Run "one diff [files]" to see if the remote or local file is more up to date
+  You can specify a path on Mediafire. e.g. "one diff test1.txt -p MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"  
+Ex: "$one diff test1.txt" will state if the file on Mediafire is more or less up to date than the local file  
 
-####"one share" (Soon to be deprecated)
-Run "one share [files]" to receive the direct download link to a file and optionally email that link to anyone
+####"one share" (Soon to be deprecated)  
+Run "one share [files]" to receive the direct download link to a file and optionally email that link to anyone  
+  
+####"one list"  
+Run "one list" to receive a list of the files currently stored on the signed in Mediafire account  
+  You can specify a path on Mediafire. e.g. "one list MediaFire_Folder_1/MediaFire_Folder_2/"  
 
-####"one list"
-Run "one list" to receive a list of the files currently stored on the signed in Mediafire account
-  You can specify a path on Mediafire. e.g. "one list MediaFire_Folder_1/MediaFire_Folder_2/"
-
-####"one del"
-Run "one del [files]" to delete a file from Mediafire  
-Ex: "$one del test1.txt test2.docx" will delete test1.txt and test2.docx from the signed in Mediafire account
-  You can specify a path on Mediafire. e.g. "one del MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"
+####"one del"  
+Run "one del [files]" to delete a file from Mediafire    
+Ex: "$one del test1.txt test2.docx" will delete test1.txt and test2.docx from the signed in Mediafire account  
+  You can specify a path on Mediafire. e.g. "one del MediaFire_Folder_1/MediaFire_Folder_2/test1.txt"  
